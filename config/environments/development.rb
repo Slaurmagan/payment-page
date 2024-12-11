@@ -72,4 +72,5 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.turbo.signed_stream_verifier_key = "6920782271bae5987ab807ae6a7dca86f2f3c04bff6ebd9fca89e69777f480edc6ad7240e9bef917c829255a6d0fac6818844153a924c98987d658fe99721c35"
+  config.hosts.clear
 end

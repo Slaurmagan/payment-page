@@ -1,12 +1,12 @@
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
   <div class="flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>">
-    <h1 class="text-3xl">К переводу <%= payment[:amount] %> <%= payment[:currency] %></h1>
+    <h1 class="text-xl sm:text-3xl">К переводу <%= payment[:amount] %> <%= payment[:currency] %></h1>
 
     <div class="w-full h-24 px-6 mt-6">
       <div class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 h-full rounded-3xl">
         <div class="h-full w-full p-4">
           <div class="h-full bg-gray-100 flex justify-center items-center rounded-2xl px-4">
-            <span class="text-lg"><%= payment[:requisite] %></span>
+            <span class="text-base sm:text-lg"><%= payment[:requisite] %></span>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
       </ul>
     </div>
 
-    <div class="mt-6 px-6 w-full">
+    <div class="mt-6 px-6 w-full mb-4 sm:mb-0">
       <button class="w-full h-14 rounded-3xl text-blue-500 font-light border-[1px] border-blue-500 hover:bg-blue-100 transition-colors">
         Отменить платеж
       </button>
