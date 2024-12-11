@@ -1,0 +1,111 @@
+services:
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    ports:
+      - 9092:9092  # Host listener
+      - 9093:9093  # Docker listener
+    environment:
+      CLUSTER_ID: kafka-docker-cluster-1
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_DOCKER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENERS: PLAINTEXT_HOST://0.0.0.0:9092,PLAINTEXT_DOCKER://kafka:9093,CONTROLLER://:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,PLAINTEXT_DOCKER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT_HOST://localhost:9092,PLAINTEXT_DOCKER://kafka:9093
+      KAFKA_BROKER_ID: 1
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9094
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+      KAFKA_AUTHORIZER_CLASS_NAME: org.apache.kafka.metadata.authorizer.StandardAuthorizer
+    healthcheck:
+      test: /usr/bin/kafka-cluster cluster-id --bootstrap-server localhost:9092 || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 100
+
+  redis:
+    image: "redis:6.2.3-alpine"
+    command: redis-server
+    restart: unless-stopped
+    networks:
+      - default
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: payment-page:latest
+    command: bash -c "foreman start -f Procfile.dev"
+    ports:
+      - '9567:3001'
+    volumes:
+      - ./:/payment-page
+      - bundle:/bundle
+    tmpfs:
+      - /tmp/pids/
+    stdin_open: true
+    tty: true
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+    links:
+      - redis
+    networks:
+      - default
+
+  karafka:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: payment-page:latest
+    command: bundle exec karafka server
+    volumes:
+      - ./:/payment-page
+      - bundle:/bundle
+    tmpfs:
+      - /tmp/pids/
+    stdin_open: true
+    tty: true
+    depends_on:
+      - kafka
+    links:
+      - kafka
+    networks:
+      - default
+
+  anycable-rpc:
+    build: .
+    command: bundle exec anycable
+    image: payment-page:latest
+    environment:
+      ANYCABLE_REDIS_URL: redis://redis/8
+      ANYCABLE_RPC_HOST: 0.0.0.0:3000
+      ANYCABLE_HOST: 0.0.0.0
+      ANYCABLE_PORT: 3001
+      ANYCABLE_DEBUG: 1
+    volumes:
+      - .:/payment-page
+      - bundle:/bundle
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  anycable-server:
+    image: anycable/anycable-go:1.4.4
+    environment:
+      ANYCABLE_REDIS_URL: redis://redis/8
+      ANYCABLE_RPC_HOST: anycable-rpc:3000
+      ANYCABLE_HOST: "0.0.0.0"
+      ANYCABLE_DEBUG: 1
+    ports:
+      - "9568:8080"
+    restart: unless-stopped
+    depends_on:
+      - anycable-rpc
+volumes:
+  bundle:

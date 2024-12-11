@@ -1,0 +1,5 @@
+<!--Основной див-->
+
+<%= turbo_stream_from "payments_#{params[:id]}" %>
+
+<%= render partial: 'payment', locals: { payment: @payment } %>

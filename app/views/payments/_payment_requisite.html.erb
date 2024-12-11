@@ -1,0 +1,41 @@
+<%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
+  <div class="flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>">
+    <h1 class="text-3xl">К переводу <%= payment[:amount] %> <%= payment[:currency] %></h1>
+
+    <div class="w-full h-24 px-6 mt-6">
+      <div class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 h-full rounded-3xl">
+        <div class="h-full w-full p-4">
+          <div class="h-full bg-gray-100 flex justify-center items-center rounded-2xl px-4">
+            <span class="text-lg"><%= payment[:requisite] %></span>
+            <%#= image_tag 'copy.svg', height: 30, width: 30 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 w-full px-6">
+      <div class="border-[1px] border-gray-300 rounded-3xl grid grid-cols-1 divide-y px-4 py-2" data-controller="countdown" data-countdown-end-date-value="<%= payment[:expires_at] %>">
+        <div class="py-3 flex justify-between">
+          <span class="font-light">Время:</span>
+          <span data-countdown-target="countdown"></span>
+        </div>
+        <div class="py-3 flex justify-between">
+          <span class="font-light">Получатель:</span>
+          <span>Вася Пупкин</span>
+        </div>
+        <div class="py-3 flex justify-between">
+          <span class="font-light">Банк:</span>
+          <span>Дота Банк</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 px-6">
+      <ul class="list-disc ml-6">
+        <li class="font-light">Перевод нужно сделать <span class="text-red-500">одним платежом</span></li>
+        <li class="font-light">Комментарий к переводу <span class="text-red-500">писать не нужно</span></li>
+        <li class="font-light">Номер платежа <span class="text-red-500"><%= payment[:id] %></span></li>
+      </ul>
+    </div>
+  </div>
+<% end %>

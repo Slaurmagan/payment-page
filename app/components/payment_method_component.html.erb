@@ -1,0 +1,7 @@
+<div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-[100px] mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4"
+     data-controller="payment-method" data-action="click->payment-method#click" style="
+height:  100px;
+" data-payment-method-code="<%= @payment_method[:code] %>">
+  <img src="<%= @payment_method[:image_url] %>" width="30" height="30"> &nbsp;
+  <%= @payment_method[:displayed_name] %>
+</div>

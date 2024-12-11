@@ -1,0 +1,46 @@
+<!--Основной див-->
+<div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full h-screen flex flex-col">
+  <!--    БГ с градиентом-->
+  <div class="flex-initial">
+    <p class="text-xl font-medium mt-5 ml-6">Как выполнить оплату?</p>
+    <p class="text-sm font-extralight mt-5 ml-6">Выберите банк</p>
+    <div class="mt-5 mb-5 ml-6 mr-6">
+      <div class="bg-white flex justify-between py-4 px-8 rounded-3xl">
+        <div class="w-10 h-10 font-light text-sm rounded-full bg-blue-500 text-white font-bold flex items-center justify-center">1</div>
+        <div class="w-10 h-10 font-light text-sm rounded-full bg-white border-blue-500 border-[1px] text-blue-500 font-bold flex items-center justify-center">2</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="z-10 bg-white h-100 flex-1 rounded-t-3xl overflow-scroll">
+    <div class="flex flex-col mt-10">
+      <% if payment_methods? %>
+        <%= render PaymentMethodComponent.with_collection(payment_methods) %>
+      <% end %>
+
+
+
+      <!--      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-20 mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4">-->
+      <!--        <img src="https://companieslogo.com/img/orig/SBER.ME-10de1f5f.png?t=1720244493" width="30" height="30"> &nbsp;-->
+      <!--        Дота Банк-->
+      <!--      </div>-->
+      <!--      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-20 mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4">-->
+      <!--        <img src="https://companieslogo.com/img/orig/SBER.ME-10de1f5f.png?t=1720244493" width="30" height="30"> &nbsp;-->
+      <!--        Дота Банк-->
+      <!--      </div>-->
+      <!--      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-20 mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4">-->
+      <!--        <img src="https://companieslogo.com/img/orig/SBER.ME-10de1f5f.png?t=1720244493" width="30" height="30"> &nbsp;-->
+      <!--        Дота Банк-->
+      <!--      </div>-->
+      <!--      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-20 mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4">-->
+      <!--        <img src="https://companieslogo.com/img/orig/SBER.ME-10de1f5f.png?t=1720244493" width="30" height="30"> &nbsp;-->
+      <!--        Дота Банк-->
+      <!--      </div>-->
+      <!--      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-20 mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4">-->
+      <!--        <img src="https://companieslogo.com/img/orig/SBER.ME-10de1f5f.png?t=1720244493" width="30" height="30"> &nbsp;-->
+      <!--        Дота Банк-->
+      <!--      </div>-->
+    </div>
+    <!--      Платежные методы с z-index выше чем у родительского блока-->
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<%= turbo_frame_tag 'payment' do %>
+  <% _, header_partial = PaymentToHeaderTurboPartial.call(payment) %>
+  <% _, body_partial = PaymentToBodyTurboPartial.call(payment) %>
+
+  <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full h-screen flex flex-col">
+    <div class="flex-initial">
+      <%= render(partial: header_partial, locals: local_assigns) %>
+    </div>
+
+    <div class="z-10 bg-white h-100 flex-1 rounded-t-3xl overflow-scroll">
+      <%= render(partial: body_partial, locals: local_assigns) %>
+    </div>
+  </div>
+<% end %>
