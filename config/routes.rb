@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :payments, only: :show do
     member do
       post :assign_payment_method
+      post :cancel
     end
   end
 end

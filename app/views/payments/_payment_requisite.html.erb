@@ -1,18 +1,24 @@
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
-  <div class="flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>">
+  <div class="flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>" data-controller="clipboard" data-clipboard-success-content-value="Скопировано!">
     <h1 class="text-xl sm:text-3xl">К переводу <%= payment[:amount] %> <%= payment[:currency] %></h1>
 
-    <div class="w-full h-24 px-6 mt-6">
+    <div class="w-full h-24 px-6 sm:px-12 mt-6">
       <div class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 h-full rounded-3xl">
         <div class="h-full w-full p-4">
           <div class="h-full bg-gray-100 flex justify-center items-center rounded-2xl px-4">
-            <span class="text-base sm:text-lg"><%= payment[:requisite] %></span>
+            <span class="text-base sm:text-lg" data-clipboard-target="source"><%= payment[:requisite] %></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-6 w-full px-6">
+    <div class="mt-6 px-6 sm:px-12 w-full mb-4 sm:mb-0">
+      <button class="w-full h-14 rounded-3xl text-green-500 font-light border-[1px] border-green-500 hover:bg-green-100 transition-colors" data-clipboard-target="button" data-action="clipboard#copy">
+        Скопировать
+      </button>
+    </div>
+
+    <div class="mt-6 w-full px-6 sm:px-12">
       <div class="border-[1px] border-gray-300 rounded-3xl grid grid-cols-1 divide-y px-4 py-2" data-controller="countdown" data-countdown-end-date-value="<%= payment[:expires_at] %>">
         <div class="py-3 flex justify-between">
           <span class="font-light">Время:</span>
@@ -20,16 +26,16 @@
         </div>
         <div class="py-3 flex justify-between">
           <span class="font-light">Получатель:</span>
-          <span>Вася Пупкин</span>
+          <span><%= payment[:holder] %></span>
         </div>
         <div class="py-3 flex justify-between">
           <span class="font-light">Банк:</span>
-          <span>Дота Банк</span>
+          <span><%= payment[:bank_name] %></span>
         </div>
       </div>
     </div>
 
-    <div class="mt-6 px-6">
+    <div class="mt-6 px-6 sm:px-12 sm:hidden">
       <ul class="list-disc ml-6">
         <li class="font-light">Перевод нужно сделать <span class="text-red-500">одним платежом</span></li>
         <li class="font-light">Комментарий к переводу <span class="text-red-500">писать не нужно</span></li>
@@ -37,8 +43,8 @@
       </ul>
     </div>
 
-    <div class="mt-6 px-6 w-full mb-4 sm:mb-0">
-      <button class="w-full h-14 rounded-3xl text-blue-500 font-light border-[1px] border-blue-500 hover:bg-blue-100 transition-colors">
+    <div class="mt-6 px-6 w-full mb-4 sm:mb-0 sm:px-12" data-controller="cancel">
+      <button class="w-full h-14 rounded-3xl text-blue-500 font-light border-[1px] border-blue-500 hover:bg-blue-100 transition-colors" data-action="click->cancel#click">
         Отменить платеж
       </button>
     </div>
