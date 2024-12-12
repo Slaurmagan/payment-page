@@ -3,7 +3,7 @@ class RedisPaymentMethods
 
   class << self
     def fetch
-      Rails.cache.read('payment_page:payment_methods').presence || []
+      JSON.parse($redis.get('payment_page:payment_methods').presence || '[]')
     end
   end
 end
