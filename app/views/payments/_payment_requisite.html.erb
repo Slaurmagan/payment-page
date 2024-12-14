@@ -22,7 +22,11 @@
       <div class="border-[1px] border-gray-300 rounded-3xl grid grid-cols-1 divide-y px-4 py-2" data-controller="countdown" data-countdown-end-date-value="<%= payment[:expires_at] %>">
         <div class="py-3 flex justify-between">
           <span class="font-light">Время:</span>
-          <span data-countdown-target="countdown"></span>
+          <span>
+            <span data-countdown-target="countdown"></span>
+            &#x23F0;
+          </span>
+
         </div>
         <div class="py-3 flex justify-between">
           <span class="font-light">Получатель:</span>

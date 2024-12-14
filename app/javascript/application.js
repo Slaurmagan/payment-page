@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import {Turbo} from "@hotwired/turbo-rails"
-//
+
 Turbo.StreamActions.console_log = function () {
   const method = this.getAttribute("method");
   this.targetElements.forEach((targetElement => {
@@ -13,7 +13,6 @@ Turbo.StreamActions.console_log = function () {
     }
   }));
 }
-
 
 Turbo.StreamActions.replaceWithSlideAnimation = function () {
   const method = this.getAttribute("method");

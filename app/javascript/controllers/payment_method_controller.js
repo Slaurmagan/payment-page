@@ -13,7 +13,7 @@ export default class extends Controller {
           "Accept": "text/vnd.turbo-stream.html",
         },
         contentType: 'application/json',
-        responseType: "turbo-stream"
+        responseKind: "turbo-stream"
       }
     )
   }
