@@ -9,8 +9,8 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
   <%= action_cable_meta_tag %>
+  <%= javascript_include_tag "application", defer: true %>
   <%#= action_cable_with_jwt_meta_tag %>
-  <%= javascript_importmap_tags %>
 </head>
 
 <body>

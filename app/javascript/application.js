@@ -1,8 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
-import "controllers"
+import "./controllers"
 import {Turbo} from "@hotwired/turbo-rails"
-
+//
 Turbo.StreamActions.console_log = function () {
   const method = this.getAttribute("method");
   this.targetElements.forEach((targetElement => {
@@ -39,3 +39,8 @@ Turbo.StreamActions.replaceWithSlideAnimation = function () {
     }
   }));
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('sdfsdf')
+})

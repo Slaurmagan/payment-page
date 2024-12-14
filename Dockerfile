@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -qq -y --no-install-recommends \
       curl && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://dl.yarnpkg.com/debian/pubkey.gpg
-RUN curl https://deb.nodesource.com/setup_16.x | bash
+RUN curl https://deb.nodesource.com/setup_20.x | bash
 RUN cat pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
