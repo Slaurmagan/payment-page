@@ -1,4 +1,4 @@
-<% payment_methods = RedisPaymentMethods.fetch %>
+<% payment_methods = RedisPaymentMethods.from_payment(payment) %>
 
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>" data-hello-target="paymentMethods">
