@@ -8,15 +8,12 @@ Sentry.init do |config|
 
   # Настраиваем environment для Sentry
   config.environment = kubernetes_namespace
-  config.enabled_environments = %w[dev prod]
 
   # Разрешаем Sentry только для определенных namespace и веток
   allowed_namespaces = %w[dev prod]
   allowed_branches = %w[dev main]
 
   if allowed_namespaces.include?(kubernetes_namespace) && allowed_branches.include?(current_branch)
-    config.enabled = true
-  else
-    config.enabled = false
+    config.enabled_environments = allowed_namespaces
   end
 end
