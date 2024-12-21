@@ -1,3 +1,2 @@
-css: bin/rails tailwindcss:watch
-karafka: bundle exec karafka server
+css: yarn build:css
 js: yarn build

@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+.animated {
+    transition: transform 0.5s ease;
 }
 
-*/
+.slide-out {
+    transform: translateX(-100vw);
+}
+
+.slide-in {
+    transform: translateX(0) !important;
+}
+
+.out-of-screen {
+    transform: translateX(100vw)
+}
