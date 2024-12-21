@@ -44,3 +44,5 @@ gem 'anycable-rails', '~> 1.4.1'
 
 gem 'httparty'
 gem 'dry-monads'
+
+gem "jsbundling-rails", "~> 1.3"

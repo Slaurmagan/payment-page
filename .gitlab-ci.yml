@@ -1,0 +1,16 @@
+include:
+  - project: "real-payments/luniz/devops/cicd"
+    ref: main
+    file: "/gitlab-ci/.build.yml"
+  - project: "real-payments/luniz/devops/cicd"
+    ref: main
+    file: "/gitlab-ci/.deploy-aws.yml"
+
+stages:
+  - build
+  - deploy
+
+variables:
+  APP_NAME: payment-page
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-${CI_COMMIT_SHORT_SHA}
+  IMAGE_TAG: $CI_COMMIT_REF_SLUG-${CI_COMMIT_SHORT_SHA}
