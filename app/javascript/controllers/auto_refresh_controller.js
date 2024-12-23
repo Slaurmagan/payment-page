@@ -11,7 +11,7 @@ export default class extends Controller {
   connect() {
     this.intervalId = setInterval(() => {
       post(
-        `${window.location.href}/cached_payment`,
+        `${window.location.href}/${this.pathValue}`,
         {
           body: {
             hash: this.hashValue,
