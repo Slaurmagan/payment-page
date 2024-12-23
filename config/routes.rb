@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       post :assign_payment_method
       post :cancel
+      post :cached_payment
     end
   end
 end

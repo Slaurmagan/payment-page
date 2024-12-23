@@ -39,7 +39,3 @@ Turbo.StreamActions.replaceWithSlideAnimation = function () {
   }));
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('sdfsdf')
-})
