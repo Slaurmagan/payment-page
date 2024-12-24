@@ -2,15 +2,25 @@
 <% _, body_partial = PaymentToBodyTurboPartial.call(payment) %>
 
 <div class="w-full h-screen flex justify-center items-center sm:bg-gray-100">
-  <div class="bg-gradient-to-r from-cyan-500 to-blue-500 w-full h-screen sm:h-auto flex flex-col sm:bg-none sm:flex-row sm:grid sm:grid-cols-[45%_55%] sm:divide-x sm:divide-gray-300 sm:bg-white sm:rounded-3xl sm:py-8 sm:min-h-[50%] sm:w-auto sm:min-w-[50%] sm:max-w-[70%] overflow-scroll sm:overflow-hidden">
+  <div
+    class="
+      bg-gradient-to-r from-cyan-500 to-blue-500 w-full h-screen sm:h-auto flex
+      flex-col sm:bg-none sm:flex-row sm:grid sm:grid-cols-[45%_55%] sm:divide-x
+      sm:divide-gray-300 sm:bg-white sm:rounded-3xl sm:py-8 sm:min-h-[50%] sm:w-auto
+      sm:min-w-[50%] sm:max-w-[70%] overflow-scroll sm:overflow-hidden
+    "
+  >
     <div class="flex-initial">
       <%= render(partial: header_partial, locals: local_assigns) %>
     </div>
 
-    <div class="z-10 bg-white sm:bg-inherit h-100 flex-1 rounded-t-3xl sm:overflow-hidden sm:rounded-none">
+    <div
+      class="
+        z-10 bg-white sm:bg-inherit h-100 flex-1 rounded-t-3xl sm:overflow-hidden
+        sm:rounded-none
+      "
+    >
       <%= render(partial: body_partial, locals: local_assigns) %>
     </div>
   </div>
 </div>
-
-

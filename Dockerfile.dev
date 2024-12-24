@@ -47,5 +47,3 @@ RUN yarn install
 RUN bundle install
 
 COPY . /$APP_NAME
-
-ENTRYPOINT ["bash","docker-compose-entrypoint.sh"]
