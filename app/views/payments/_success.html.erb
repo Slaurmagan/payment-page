@@ -1,5 +1,13 @@
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
-  <div class="flex flex-col items-center justify-center h-full animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>">
-    <%= image_tag 'success.gif' %>
+  <div
+    class="
+      flex flex-col items-center justify-center h-full animated
+      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+    data-controller="auto-redirect"
+    data-auto-redirect-redirect-in-value="5"
+    data-auto-redirect-redirect-to-value="<%= payment[:success_url] %>"
+  >
+    <%= image_tag "success.gif" %>
   </div>
 <% end %>
