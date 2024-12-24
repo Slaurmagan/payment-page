@@ -9,7 +9,6 @@ export default class extends Controller {
 
   connect() {
     setTimeout(() => {
-      debugger
       window.location.href = this.redirectToValue;
     }, this.redirectInValue * 1000)
   }
