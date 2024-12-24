@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
     payment = RedisPayment.fetch(params[:id])
 
     unless payment[:hash] != params[:hash]
-      head :ok, content_type: "text/vnd.turbo-stream.html"
+      head :ok, content_type: 'text/vnd.turbo-stream.html'
       return
     end
 
