@@ -32,6 +32,19 @@ class PaymentsController < ApplicationController
     render_payment(payment)
   end
 
+  def fingerprint
+    payment = RedisPayment.fetch(params[:id])
+
+    unless payment[:fingerprint]
+      head :ok, content_type: 'text/vnd.turbo-stream.html'
+      return
+    end
+
+    response = ApiClient::Fingerprint.call(params[:id], params[:fingerprint_result])
+
+    render_payment(response.value!)
+  end
+
   private
 
   def render_payment(payment)

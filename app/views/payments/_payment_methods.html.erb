@@ -1,17 +1,39 @@
 <% payment_methods = RedisPaymentMethods.from_payment(payment) %>
 
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>" data-hello-target="paymentMethods">
+  <%= fingerprint_tag(ENV["FINGERPRINT_API_KEY"]) if payment[:fingerprint] %>
+  <div
+    class="
+      grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated
+      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+    data-hello-target="paymentMethods"
+  >
     <% payment_methods.each do |payment_method| %>
-      <div class="border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center align-middle h-[100px] sm:h-[130px] mr-6 ml-6 rounded-3xl flex items-center justify-center mb-4 transition-colors hover:cursor-pointer"
-           data-controller="payment-method" data-action="click->payment-method#click" data-payment-method-code="<%= payment_method['code'] %>">
-        <img src="<%= payment_method['image_url'] %>" width="30" height="30"> &nbsp;
-        <%= payment_method['displayed_name'] %>
+      <div
+        class="
+          border-[1px] border-gray-300 hover:border-blue-300 hover:bg-blue-100 text-center
+          align-middle h-[100px] sm:h-[130px] mr-6 ml-6 rounded-3xl flex items-center
+          justify-center mb-4 transition-colors hover:cursor-pointer
+        "
+        data-controller="payment-method"
+        data-action="click->payment-method#click"
+        data-payment-method-code="<%= payment_method['code'] %>"
+      >
+        <img src="<%= payment_method['image_url'] %>" width="30" height="30">
+        &nbsp;
+        <%= payment_method["displayed_name"] %>
       </div>
     <% end %>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>" data-hello-target="paymentMethods">
+  <div
+    class="
+      grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated
+      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+    data-hello-target="paymentMethods"
+  >
     <%= render PaymentMethodComponent.with_collection(payment_methods) %>
   </div>
 <% end %>
