@@ -29,7 +29,7 @@ module ApiClient
 
     def body
       {
-        visit_data: params[:meta],
+        visit_data: params,
         fingerprint: params[:visitorId],
         payment_id: payment_id
       }

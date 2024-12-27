@@ -13,7 +13,7 @@ export default class extends Controller {
       region: "eu"
     })
 
-    fpPromise.then(fp => fp.get()).then(result => {
+    fpPromise.then(fp => fp.get({ extendedResult: true })).then(result => {
       post(`${window.location.href}/analytics`, {
         body: {
           fingerprint_result: result
