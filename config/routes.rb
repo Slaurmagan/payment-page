@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       post :assign_payment_method
       post :cancel
       post :cached_payment
-      post :fingerprint
+      post :analytics
     end
   end
 end

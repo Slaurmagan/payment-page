@@ -14,7 +14,7 @@ export default class extends Controller {
     })
 
     fpPromise.then(fp => fp.get()).then(result => {
-      post(`${window.location.href}/fingerprint`, {
+      post(`${window.location.href}/analytics`, {
         body: {
           fingerprint_result: result
         },

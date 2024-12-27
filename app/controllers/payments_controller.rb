@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
     render_payment(payment)
   end
 
-  def fingerprint
+  def analytics
     payment = RedisPayment.fetch(params[:id])
 
     unless payment[:fingerprint]
