@@ -1,5 +1,10 @@
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
-  <div class="flex flex-col items-center justify-center h-full animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>">
+  <div
+    class="
+      flex flex-col items-center justify-center h-full animated
+      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+  >
     Not found
   </div>
 <% end %>
