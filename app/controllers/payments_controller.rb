@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
 
     response = ApiClient::Fingerprint.call(params[:id], params[:fingerprint_result])
 
-    render_payment(response.value!, action: 'replace')
+    render_payment(response.value!)
   end
 
   private

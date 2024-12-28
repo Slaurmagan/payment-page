@@ -7,22 +7,24 @@ class PaymentToBodyTurboPartial < ApplicationService
 
   def call
     partial =
-      case [status, payment_method_id, payment_requisite_id, payment_method_type]
-      in ['pending', nil, nil, _]
+      case [status, payment_method_id, payment_requisite_id, payment_method_type, fingerprint]
+      in [_, _, _, _, true]
+        'payments/fingerprint'
+      in ['pending', nil, nil, _, _]
         'payments/payment_methods'
-      in ['pending', String, nil, _]
+      in ['pending', String, nil, _, _]
         'payments/loading'
-      in ['processing', String, String, 'card']
+      in ['processing', String, String, 'card', _]
         'payments/payment_requisite'
-      in ['processing', String, String, 'phone']
+      in ['processing', String, String, 'phone', _]
         'payments/payment_requisite'
-      in ['processing', String, String, 'iban']
+      in ['processing', String, String, 'iban', _]
         'payments/payment_requisite'
-      in ['processing', String, String, 'payment_account']
+      in ['processing', String, String, 'payment_account', _]
         'payments/payment_requisite'
-      in ['expired', _, _, _]
+      in ['expired', _, _, _, _]
         'payments/expired'
-      in ['success', _, _, _]
+      in ['success', _, _, _, _]
         'payments/success'
       else
         'payments/error'
@@ -49,5 +51,9 @@ class PaymentToBodyTurboPartial < ApplicationService
 
   def payment_method_type
     payment[:payment_method_type]
+  end
+
+  def fingerprint
+    payment[:fingerprint]
   end
 end

@@ -4,31 +4,47 @@ import {post} from "@rails/request.js"
 
 export default class extends Controller {
   static values = {
-    apiKey: String
+    apiKey: String,
+    urlPattern: String,
+    endpoint: String
   }
 
   connect() {
-    const visitorId = localStorage.getItem('fpVisitor')
+    const fpResult = localStorage.getItem('fpResult')
 
-    if (!visitorId) {
+    if (!fpResult) {
       const fpPromise = FingerprintJS.load({
         apiKey: this.apiKeyValue,
+        endpoint: [
+          this.endpointValue,
+          FingerprintJS.defaultEndpoint
+        ],
+        scriptUrlPattern: [
+          this.urlPatternValue,
+          FingerprintJS.defaultScriptUrlPattern
+        ],
         region: "eu"
       })
 
       fpPromise.then(fp => fp.get({extendedResult: true})).then(result => {
-        post(`${window.location.href}/analytics`, {
-          body: {
-            fingerprint_result: result
-          },
-          headers: {
-            "Accept": "text/vnd.turbo-stream.html"
-          },
-          contentType: "application/json",
-          responseKind: "turbo-stream"
-        })
-        localStorage.setItem('fpVisitor', result.visitorId)
+        this.makeRequest(result)
+        localStorage.setItem('fpResult', JSON.stringify(result))
       })
+    } else {
+      this.makeRequest(JSON.parse(fpResult))
     }
+  }
+
+  makeRequest(result) {
+    post(`${window.location.href}/analytics`, {
+      body: {
+        fingerprint_result: result
+      },
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html"
+      },
+      contentType: "application/json",
+      responseKind: "turbo-stream"
+    })
   }
 }
