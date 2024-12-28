@@ -8,6 +8,10 @@ class PaymentToBodyTurboPartial < ApplicationService
   def call
     partial =
       case [status, payment_method_id, payment_requisite_id, payment_method_type, fingerprint]
+      in ['expired', _, _, _, _]
+        'payments/expired'
+      in ['success', _, _, _, _]
+        'payments/success'
       in [_, _, _, _, true]
         'payments/fingerprint'
       in ['pending', nil, nil, _, _]
@@ -22,10 +26,6 @@ class PaymentToBodyTurboPartial < ApplicationService
         'payments/payment_requisite'
       in ['processing', String, String, 'payment_account', _]
         'payments/payment_requisite'
-      in ['expired', _, _, _, _]
-        'payments/expired'
-      in ['success', _, _, _, _]
-        'payments/success'
       else
         'payments/error'
       end
