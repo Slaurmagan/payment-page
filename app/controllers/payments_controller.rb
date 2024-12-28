@@ -1,9 +1,11 @@
 class PaymentsController < ApplicationController
-  def show
-    @payment = RedisPayment.fetch(params[:id])
-  end
+  before_action :find_payment
+
+  def show; end
 
   def assign_payment_method
+    return if @payment[:payment_method_id].present?
+
     response = ApiClient::AssignPaymentMethod.call(params[:id], params[:payment_method_code])
 
     return unless response.success?
@@ -13,6 +15,8 @@ class PaymentsController < ApplicationController
   end
 
   def cancel
+    return if @payment[:status] == 'expired'
+
     response = ApiClient::CancelPayment.call(params[:id])
 
     return unless response.success?
@@ -22,20 +26,16 @@ class PaymentsController < ApplicationController
   end
 
   def cached_payment
-    payment = RedisPayment.fetch(params[:id])
-
-    unless payment[:hash] != params[:hash]
+    unless @payment[:hash] != params[:hash]
       head :ok, content_type: 'text/vnd.turbo-stream.html'
       return
     end
 
-    render_payment(payment)
+    render_payment(@payment)
   end
 
   def analytics
-    payment = RedisPayment.fetch(params[:id])
-
-    unless payment[:fingerprint]
+    unless @payment[:fingerprint]
       head :ok, content_type: 'text/vnd.turbo-stream.html'
       return
     end
@@ -46,6 +46,10 @@ class PaymentsController < ApplicationController
   end
 
   private
+
+  def find_payment
+    @payment = RedisPayment.fetch(params[:id])
+  end
 
   def render_payment(payment, action: 'replaceWithSlideAnimation')
     body = PaymentToBodyTurboPartial.call(payment)
