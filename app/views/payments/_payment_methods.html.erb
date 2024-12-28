@@ -1,13 +1,11 @@
 <% payment_methods = RedisPaymentMethods.from_payment(payment) %>
 
 <%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
-  <%= fingerprint_tag(ENV["FINGERPRINT_API_KEY"]) if payment[:fingerprint] %>
   <div
     class="
       grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated
       <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
     "
-    data-hello-target="paymentMethods"
   >
     <% payment_methods.each do |payment_method| %>
       <div
@@ -27,13 +25,4 @@
     <% end %>
   </div>
 
-  <div
-    class="
-      grid grid-cols-1 sm:grid-cols-2 gap-y-6 mt-10 animated
-      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
-    "
-    data-hello-target="paymentMethods"
-  >
-    <%= render PaymentMethodComponent.with_collection(payment_methods) %>
-  </div>
 <% end %>

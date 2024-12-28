@@ -1,0 +1,46 @@
+<%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
+  <%= fingerprint_tag(
+    ENV["FINGERPRINT_API_KEY"],
+    ENV["FINGERPRINT_ENDPOINT"],
+    ENV["FINGERPRINT_URL_PATTERN"],
+  ) %>
+  <div
+    class="
+      flex flex-col items-center justify-center h-full animated
+      <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+    data-controller="auto-refresh"
+    data-auto-refresh-frequency-value="15"
+    data-auto-refresh-path-value="cached_payment"
+    data-auto-refresh-hash-value="<%= payment[:hash] %>"
+  >
+    <svg
+      version="1.1"
+      id="L5"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      viewBox="0 0 120 100"
+      enable-background="new 0 0 0 0"
+      xml:space="preserve"
+      style="width: 100px;"
+    >
+      <!-- First Circle -->
+      <circle fill="#3b82f6" stroke="none" cx="30" cy="50" r="10">
+        <animateTransform attributeName="transform" dur="1s" type="translate"
+        values="0 20 ; 0 -20; 0 20" repeatCount="indefinite" begin="0.1" />
+      </circle>
+      <!-- Second Circle -->
+      <circle fill="#3b82f6" stroke="none" cx="60" cy="50" r="10">
+        <animateTransform attributeName="transform" dur="1s" type="translate"
+        values="0 15 ; 0 -15; 0 15" repeatCount="indefinite" begin="0.2" />
+      </circle>
+      <!-- Third Circle -->
+      <circle fill="#3b82f6" stroke="none" cx="90" cy="50" r="10">
+        <animateTransform attributeName="transform" dur="1s" type="translate"
+        values="0 10 ; 0 -10; 0 10" repeatCount="indefinite" begin="0.3" />
+      </circle>
+    </svg>
+  </div>
+<% end %>
