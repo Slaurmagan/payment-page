@@ -7,7 +7,7 @@ module ApplicationHelper
                   controller: 'analytics',
                   analytics_api_key_value: api_key,
                   analytics_endpoint_value: endpoint,
-                  analytics_script_url_pattern: url_pattern
+                  analytics_url_pattern_value: url_pattern
                 }
   end
 end
