@@ -1,4 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
+import {post} from "@rails/request.js"
 
 export default class extends Controller {
   static targets = ['countdown']
@@ -37,7 +38,18 @@ export default class extends Controller {
 
     // Stop countdown when time reaches zero
     if (timeRemaining === 0) {
+      this.expire()
       clearInterval(this.intervalId);
     }
+  }
+
+  expire() {
+    post(`${window.location.href}/expire`, {
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html"
+      },
+      contentType: "application/json",
+      responseKind: "turbo-stream"
+    })
   }
 }
