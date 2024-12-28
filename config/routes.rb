@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post :cancel
       post :cached_payment
       post :analytics
+      post :expire
     end
   end
 end

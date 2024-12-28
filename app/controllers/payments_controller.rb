@@ -14,6 +14,17 @@ class PaymentsController < ApplicationController
     render_payment(payment)
   end
 
+  def expire
+    return if @payment[:status] == 'expired'
+
+    response = ApiClient::Expire.call(params[:id])
+
+    return unless response.success?
+
+    payment = response.value!
+    render_payment(payment)
+  end
+
   def cancel
     return if @payment[:status] == 'expired'
 
