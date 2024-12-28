@@ -53,7 +53,14 @@ class PaymentsController < ApplicationController
 
     response = ApiClient::Fingerprint.call(params[:id], params[:fingerprint_result])
 
-    render_payment(response.value!)
+    payment =
+      if response.success?
+        response.value!
+      else
+        response.failure
+      end
+
+    render_payment(payment)
   end
 
   private

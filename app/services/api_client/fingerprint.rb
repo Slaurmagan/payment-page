@@ -12,11 +12,9 @@ module ApiClient
     def call
       response = send_request
 
-      return Failure() unless response.success?
+      return Failure(response['payment'].with_indifferent_access) unless response.success?
 
-      json_response = JSON.parse(response.body).with_indifferent_access
-
-      Success(json_response['payment'])
+      Success(response['payment'].with_indifferent_access)
     end
 
     private
@@ -30,7 +28,7 @@ module ApiClient
     def body
       {
         visit_data: params,
-        fingerprint: params[:visitorId],
+        fingerprint: params&.dig(:visitorId),
         payment_id: payment_id
       }
     end

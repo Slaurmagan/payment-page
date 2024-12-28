@@ -28,6 +28,9 @@ export default class extends Controller {
         .then((result) => {
           this.makeRequest(result);
           localStorage.setItem("fpResult", JSON.stringify(result));
+        })
+        .catch((_) => {
+          this.makeRequest({});
         });
     } else {
       this.makeRequest(JSON.parse(fpResult));
