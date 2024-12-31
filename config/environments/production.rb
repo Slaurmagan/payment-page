@@ -97,4 +97,5 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.turbo.signed_stream_verifier_key = ENV['SIGNED_STREAM_VERIFIER_KEY']
+  config.hosts.clear
 end
