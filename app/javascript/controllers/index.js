@@ -1,6 +1,6 @@
 // Import and register all your controllers from the importmap via controllers/**/*_controller
-import { application } from "./application"
+import { application } from "./application";
 // import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-import Clipboard from '@stimulus-components/clipboard'
+//import Clipboard from '@stimulus-components/clipboard'
 
-application.register('clipboard', Clipboard)
+//application.register('clipboard', Clipboard)
