@@ -1,7 +1,9 @@
 class PaymentsController < ApplicationController
   before_action :find_payment
 
-  def show; end
+  def show
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+  end
 
   def assign_payment_method
     return if @payment[:payment_method_id].present?
