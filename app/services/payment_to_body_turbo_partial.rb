@@ -10,6 +10,8 @@ class PaymentToBodyTurboPartial < ApplicationService
       case [status, payment_method_id, payment_requisite_id, payment_method_type, fingerprint]
       in ['expired', _, _, _, _]
         'payments/expired'
+      in ['declined', _, _, _, _]
+        'payments/expired'
       in ['success', _, _, _, _]
         'payments/success'
       in [_, _, _, _, true]
