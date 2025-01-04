@@ -1,0 +1,6 @@
+<%= turbo_frame_tag 'payment_header' do %>
+  <p class="text-xl font-medium mt-5 ml-6 sm:px-8">Поддержка</p>
+  <p class="text-sm font-extralight mt-5 ml-6 sm:px-8">Ожидайте решения по вашему обращению</p>
+  <p class="text-sm font-extralight mt-5 ml-6 sm:px-8">Номер вашего обращения:</p>
+  <p class="text-sm font-extralight ml-6 sm:px-8 mb-10"><%= payment[:support_request_id] %></p>
+<% end %>
