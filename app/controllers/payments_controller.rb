@@ -47,7 +47,9 @@ class PaymentsController < ApplicationController
     render_payment(@payment)
   end
 
-  def support; end
+  def support
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+  end
 
   def cached_payment_support
     unless @payment[:hash] != params[:hash]
