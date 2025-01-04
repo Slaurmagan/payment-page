@@ -15,9 +15,12 @@ export default class extends Controller {
     if (!fpResult) {
       const fpPromise = FingerprintJS.load({
         apiKey: this.apiKeyValue,
-        endpoint: [this.endpointValue, FingerprintJS.defaultEndpoint],
+        endpoint: [
+          `${window.location.origin}/${this.endpointValue}`,
+          FingerprintJS.defaultEndpoint,
+        ],
         scriptUrlPattern: [
-          this.urlPatternValue,
+          `${window.location.origin}/${this.urlPatternValue}`,
           FingerprintJS.defaultScriptUrlPattern,
         ],
         region: "eu",
