@@ -73,7 +73,7 @@ class PaymentsController < ApplicationController
   end
 
   def analytics
-    unless @payment[:fingerprint]
+    if @payment.blank? || @payment[:fingerprint].blank?
       head :ok, content_type: 'text/vnd.turbo-stream.html'
       return
     end
