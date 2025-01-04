@@ -3,14 +3,17 @@ Rails.application.routes.draw do
 
   resources :payments, only: :show do
     member do
+      # Payments
       post :assign_payment_method
       post :cancel
       post :cached_payment
-      post :cached_payment_support
       post :analytics
       post :expire
-      get :support
+
+      # Support
       post :create_ticket
+      post :cached_payment_support
+      get :support
     end
   end
 end
