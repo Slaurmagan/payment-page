@@ -7,11 +7,11 @@ export default class extends Controller {
     path: String,
     hash: String
   }
-  
+
   connect() {
     this.intervalId = setInterval(() => {
       post(
-        `${window.location.href}/${this.pathValue}`,
+        `${window.location.href.replace(/\/support/, '')}/${this.pathValue}`,
         {
           body: {
             hash: this.hashValue,

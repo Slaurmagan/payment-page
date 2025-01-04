@@ -47,8 +47,33 @@ class PaymentsController < ApplicationController
     render_payment(@payment)
   end
 
+  def support
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+  end
+
+  def cached_payment_support
+    unless @payment[:hash] != params[:hash]
+      head :ok, content_type: 'text/vnd.turbo-stream.html'
+      return
+    end
+
+    render_payment_support(@payment)
+  end
+
+  def create_ticket
+    return if @payment.blank?
+    return if @payment[:support_request_id].present?
+
+    response = ApiClient::CreateSupportRequest.call(params[:id], params[:files].map(&:tempfile))
+
+    return unless response.success?
+
+    payment = response.value!
+    render_payment_support(payment)
+  end
+
   def analytics
-    unless @payment[:fingerprint]
+    if @payment.blank? || @payment[:fingerprint].blank?
       head :ok, content_type: 'text/vnd.turbo-stream.html'
       return
     end
@@ -74,6 +99,20 @@ class PaymentsController < ApplicationController
   def render_payment(payment, action: 'replaceWithSlideAnimation')
     body = PaymentToBodyTurboPartial.call(payment)
     header = PaymentToHeaderTurboPartial.call(payment)
+    to_render = [body, header]
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: to_render.map { |target, partial|
+          turbo_stream.action(action, target, partial:, locals: { payment:, with_animation: true })
+        }
+      end
+    end
+  end
+
+  def render_payment_support(payment, action: 'replaceWithSlideAnimation')
+    body = PaymentToSupportBodyTurboPartial.call(payment)
+    header = PaymentToSupportHeaderTurboPartial.call(payment)
     to_render = [body, header]
 
     respond_to do |format|

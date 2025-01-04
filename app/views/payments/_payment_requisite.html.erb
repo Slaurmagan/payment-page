@@ -85,6 +85,14 @@
       </ul>
     </div>
 
+    <div class="mt-6 px-6 w-full sm:mb-0 sm:px-12" data-controller="cancel">
+      <% if payment[:support_request_id] %>
+        <%= link_to 'Статус обращения в поддержку', support_payment_path(id: payment[:id]), class: 'w-full h-14 inline-block rounded-3xl text-gray-500 font-light border-[1px] border-gray-500 hover:bg-gray-100 transition-colors flex justify-center items-center', data: { turbo: false } %>
+      <% else %>
+        <%= link_to 'Создать обращение в поддержку', support_payment_path(id: payment[:id]), class: 'w-full h-14 inline-block rounded-3xl text-gray-500 font-light border-[1px] border-gray-500 hover:bg-gray-100 transition-colors flex justify-center items-center', data: { turbo: false } %>
+      <% end %>
+    </div>
+
     <div class="mt-6 px-6 w-full mb-4 sm:mb-0 sm:px-12" data-controller="cancel">
       <button
         class="
