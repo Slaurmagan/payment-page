@@ -19,7 +19,7 @@ export default class extends Controller {
         minFileSize: 0,
         minNumberOfFiles: 1,
         maxNumberOfFiles: 3,
-        allowedFileTypes: ['.jpg', '.jpeg', '.png', '.pdf']
+        allowedFileTypes: ['.pdf']
       },
       locale: Russian,
     }).use(Dashboard, {
