@@ -47,6 +47,14 @@ class PaymentsController < ApplicationController
     render_payment(@payment)
   end
 
+  def requisite
+    if @payment[:requisite].present?
+      return head :ok, content_type: 'text/vnd.turbo-stream.html'
+    end
+
+    ApiClient::AssignPaymentRequisite.call(params[:id])
+  end
+
   def support
     response.headers['X-Frame-Options'] = 'ALLOWALL'
   end

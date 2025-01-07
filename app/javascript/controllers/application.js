@@ -1,4 +1,4 @@
-import { Application } from "@hotwired/stimulus";
+import {Application} from "@hotwired/stimulus";
 import HelloController from "./hello_controller";
 import PaymentMethodController from "./payment_method_controller";
 import CountdownController from "./countdown_controller";
@@ -7,7 +7,8 @@ import AutoRefreshController from "./auto_refresh_controller.js";
 import AutoRedirectController from "./auto_redirect_controller.js";
 import AnalyticsController from "./analytics_controller.js";
 import ClipboardController from "./clipboard_controller.js";
-import SupportController from "./support_controller";
+import SupportController from "./support_controller.js";
+import RequestOnConnect from './request_on_connect_controller.js'
 
 const application = Application.start();
 
@@ -20,9 +21,10 @@ application.register("auto-redirect", AutoRedirectController);
 application.register("analytics", AnalyticsController);
 application.register("clipboard", ClipboardController);
 application.register("support", SupportController)
+application.register('request-on-connect', RequestOnConnect)
 
 // Configure Stimulus development experience
 application.debug = false;
 window.Stimulus = application;
 
-export { application };
+export {application};

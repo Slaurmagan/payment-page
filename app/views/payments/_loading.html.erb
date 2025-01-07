@@ -4,10 +4,11 @@
       flex flex-col items-center justify-center h-full animated
       <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
     "
-    data-controller="auto-refresh"
+    data-controller="auto-refresh request-on-connect"
     data-auto-refresh-frequency-value="15"
     data-auto-refresh-path-value="cached_payment"
     data-auto-refresh-hash-value="<%= payment[:hash] %>"
+    data-request-on-connect-path-value="requisite"
   >
     <%= image_tag "loading.gif" %>
     <p>

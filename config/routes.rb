@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post :cached_payment
       post :analytics
       post :expire
+      post :requisite
 
       # Support
       post :create_ticket
