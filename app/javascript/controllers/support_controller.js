@@ -5,7 +5,6 @@ import {ThumbnailGenerator} from "uppy";
 import Russian from '@uppy/locales/lib/ru_RU'
 import XHRUpload from '@uppy/xhr-upload'
 
-
 export default class extends Controller {
   static targets = ['dashboard']
 
