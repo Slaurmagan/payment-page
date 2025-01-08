@@ -9,17 +9,17 @@ class PaymentToHeaderTurboPartial < ApplicationService
     partial =
       case [status, payment_method_id, payment_requisite_id, payment_method_type]
       in ['pending', String, nil, _]
-        'payments/loading_header'
+        'payments/payment/header/loading_header'
       in ['processing', String, String, 'sberbank_deeplink']
-        'payments/sberbank_deeplink_header'
+        'payments/payment/header/sberbank_deeplink_header'
       in ['processing', String, String, _]
-        'payments/payment_requisite_header'
+        'payments/payment/header/payment_requisite_header'
       in ['success', _, _, _]
-        'payments/success_header'
+        'payments/payment/header/success_header'
       in ['expired', _, _, _]
-        'payments/expired_header'
+        'payments/payment/header/expired_header'
       else
-        'payments/payment_methods_header'
+        'payments/payment/header/payment_methods_header'
       end
 
     ['payment_header', partial]
