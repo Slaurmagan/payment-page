@@ -9,6 +9,7 @@ import AnalyticsController from "./analytics_controller.js";
 import ClipboardController from "./clipboard_controller.js";
 import SupportController from "./support_controller.js";
 import RequestOnConnect from './request_on_connect_controller.js'
+import DeeplinksController from './deeplinks_controller'
 
 const application = Application.start();
 
@@ -22,7 +23,7 @@ application.register("analytics", AnalyticsController);
 application.register("clipboard", ClipboardController);
 application.register("support", SupportController)
 application.register('request-on-connect', RequestOnConnect)
-
+application.register('deeplinks', DeeplinksController)
 // Configure Stimulus development experience
 application.debug = false;
 window.Stimulus = application;

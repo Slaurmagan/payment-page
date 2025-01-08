@@ -1,0 +1,91 @@
+<%= turbo_frame_tag 'payment_body', data: { with_animation: local_assigns[:with_animation] } do %>
+  <div
+    class="
+      flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
+    "
+    data-controller="auto-refresh"
+    data-auto-refresh-frequency-value="15"
+    data-auto-refresh-path-value="cached_payment"
+    data-auto-refresh-hash-value="<%= payment[:hash] %>"
+  >
+    <h1 class="text-xl sm:text-3xl">К переводу
+      <%= payment[:amount] %> <%= payment[:currency] %>
+    </h1>
+
+    <div class="w-full px-6 sm:px-12 md:my-6 hidden md:flex justify-center items-center">
+        <%= link_as_qr_code(request.original_url) %>
+    </div>
+
+    <div class="w-full h-24 px-6 sm:px-12 mt-2 md:hidden">
+      <div class="h-full w-full py-4">
+        <div
+          class="
+              h-full bg-sberpay-gradient flex justify-center items-center rounded-2xl px-4 sm
+            "
+          data-controller="deeplinks"
+          data-deeplinks-links-value="<%= payment[:deeplinks].to_json %>"
+        >
+          <span
+            class="text-base sm:text-lg"
+            data-action="click->deeplinks#open"
+          >Оплата в один клик</span> &nbsp;&nbsp;&nbsp;
+          <%= image_tag 'sberpay.png', width: 70 %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 w-full px-6 sm:px-12 md:hidden">
+      <div
+        class="
+          border-[1px] border-gray-300 rounded-3xl grid grid-cols-1 divide-y px-4 py-2
+        "
+        data-controller="countdown"
+        data-countdown-end-date-value="<%= payment[:expires_at] %>"
+      >
+        <div class="py-3 flex justify-between">
+          <span class="font-light">Время:</span>
+          <span>
+            <span data-countdown-target="countdown"></span>
+            &#x23F0;
+          </span>
+
+        </div>
+        <div class="py-3 flex justify-between">
+          <span class="font-light">Номер счета:</span>
+          <span><%= payment[:requisite] %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 px-6 sm:px-12 sm:hidden">
+      <ul class="list-disc ml-6">
+        <li class="font-light">Перевод нужно сделать
+          <span class="text-red-500">одним платежом</span></li>
+        <li class="font-light">Комментарий к переводу
+          <span class="text-red-500">писать не нужно</span></li>
+        <li class="font-light">Номер платежа
+          <span class="text-red-500"><%= payment[:id] %></span></li>
+      </ul>
+    </div>
+
+    <div class="mt-6 px-6 w-full sm:mb-0 sm:px-12" data-controller="cancel">
+      <% if payment[:support_request_id] %>
+        <%= link_to 'Статус обращения в поддержку', support_payment_path(id: payment[:id]), class: 'w-full h-14 inline-block rounded-3xl text-gray-500 font-light border-[1px] border-gray-500 hover:bg-gray-100 transition-colors flex justify-center items-center', data: { turbo: false } %>
+      <% else %>
+        <%= link_to 'Создать обращение в поддержку', support_payment_path(id: payment[:id]), class: 'w-full h-14 inline-block rounded-3xl text-gray-500 font-light border-[1px] border-gray-500 hover:bg-gray-100 transition-colors flex justify-center items-center', data: { turbo: false } %>
+      <% end %>
+    </div>
+
+    <div class="mt-6 px-6 w-full mb-4 sm:mb-0 sm:px-12" data-controller="cancel">
+      <button
+        class="
+          w-full h-14 rounded-3xl text-blue-500 font-light border-[1px] border-blue-500
+          hover:bg-blue-100 transition-colors
+        "
+        data-action="click->cancel#click"
+      >
+        Отменить платеж
+      </button>
+    </div>
+  </div>
+<% end %>

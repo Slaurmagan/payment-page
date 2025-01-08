@@ -7,14 +7,16 @@ class PaymentToHeaderTurboPartial < ApplicationService
 
   def call
     partial =
-      case [status, payment_method_id, payment_requisite_id]
-      in ['pending', String, nil]
+      case [status, payment_method_id, payment_requisite_id, payment_method_type]
+      in ['pending', String, nil, _]
         'payments/loading_header'
-      in ['processing', String, String]
+      in ['processing', String, String, 'sberbank_deeplink']
+        'payments/sberbank_deeplink_header'
+      in ['processing', String, String, _]
         'payments/payment_requisite_header'
-      in ['success', _, _]
+      in ['success', _, _, _]
         'payments/success_header'
-      in ['expired', _, _]
+      in ['expired', _, _, _]
         'payments/expired_header'
       else
         'payments/payment_methods_header'
@@ -33,6 +35,10 @@ class PaymentToHeaderTurboPartial < ApplicationService
 
   def payment_method_id
     payment[:payment_method_id]
+  end
+
+  def payment_method_type
+    payment[:payment_method_type]
   end
 
   def payment_requisite_id
