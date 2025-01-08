@@ -28,6 +28,8 @@ class PaymentToBodyTurboPartial < ApplicationService
         'payments/payment_requisite'
       in ['processing', String, String, 'payment_account', _]
         'payments/payment_requisite'
+      in ['processing', String, String, 'sberbank_deeplink', _]
+        'payments/sberbank_deeplink_requisite'
       else
         'payments/error'
       end

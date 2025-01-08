@@ -6,7 +6,11 @@ module.exports = {
     './app/views/**/*',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'sberpay-gradient': 'linear-gradient(150deg, rgb(242, 234, 0) 0%, rgb(3, 211, 29) 35%, rgb(15, 182, 254) 100%)',
+      },
+    },
   },
   plugins: [],
 }
