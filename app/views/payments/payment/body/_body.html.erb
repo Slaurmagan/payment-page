@@ -1,0 +1,4 @@
+<% _, partial = PaymentToBodyTurboPartial.call(payment) %>
+<% theme = PaymentTheme.new(payment) %>
+
+<%= render(partial:, locals: local_assigns.merge(theme:)) %>

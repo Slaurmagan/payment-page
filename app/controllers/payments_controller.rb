@@ -105,9 +105,10 @@ class PaymentsController < ApplicationController
   end
 
   def render_payment(payment, action: 'replaceWithSlideAnimation')
-    body = PaymentToBodyTurboPartial.call(payment)
-    header = PaymentToHeaderTurboPartial.call(payment)
-    to_render = [body, header]
+    to_render = [
+      %w[payment_body payments/payment/body/body],
+      %w[payment_header payments/payment/header/header]
+    ]
 
     respond_to do |format|
       format.turbo_stream do

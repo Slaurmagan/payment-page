@@ -13,23 +13,18 @@
     </h1>
 
     <div class="w-full px-6 sm:px-12 md:my-6 hidden md:flex justify-center items-center">
-        <%= link_as_qr_code(request.original_url) %>
+      <%= link_as_qr_code(payment[:deeplinks]) %>
     </div>
 
     <div class="w-full h-24 px-6 sm:px-12 mt-2 md:hidden">
       <div class="h-full w-full py-4">
         <div
           class="
-              h-full bg-sberpay-gradient flex justify-center items-center rounded-2xl px-4 sm
+              h-full bg-[#ffdd2d] flex justify-center items-center rounded-2xl px-4 sm
             "
-          data-controller="deeplinks"
-          data-deeplinks-links-value="<%= payment[:deeplinks].to_json %>"
         >
-          <span
-            class="text-base sm:text-lg"
-            data-action="click->deeplinks#open"
-          >Оплата в один клик</span> &nbsp;&nbsp;&nbsp;
-          <%= image_tag 'sberpay.png', width: 70 %>
+          <%= link_to 'Открыть приложение', payment[:deeplinks], class: 'text-base sm:text-lg inline' %> &nbsp;&nbsp;&nbsp;
+          <%= image_tag 't-pay.svg', width: 70 %>
         </div>
       </div>
     </div>
@@ -51,8 +46,8 @@
 
         </div>
         <div class="py-3 flex justify-between">
-          <span class="font-light">Номер счета:</span>
-          <span><%= payment[:requisite] %></span>
+          <span class="font-light">Банк:</span>
+          <span><%= payment[:bank_name] %></span>
         </div>
       </div>
     </div>

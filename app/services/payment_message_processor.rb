@@ -12,9 +12,11 @@ class PaymentMessageProcessor < ApplicationService
   end
 
   def call
-    body_partial = PaymentToBodyTurboPartial.call(payment)
-    header_partial = PaymentToHeaderTurboPartial.call(payment)
-    broadcast([body_partial, header_partial], stream_name, locals: { payment:, with_animation: true }, action: 'replaceWithSlideAnimation')
+    broadcast(
+      [
+        %w[payment_body payments/payment/body/body],
+        %w[payment_header payments/payment/header/header]
+      ], stream_name, locals: { payment:, with_animation: true }, action: 'replaceWithSlideAnimation')
   end
 
   private

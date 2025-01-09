@@ -1,0 +1,6 @@
+<% _, partial = PaymentToHeaderTurboPartial.call(payment) %>
+<% theme = PaymentTheme.new(payment) %>
+
+<div class="flex-initial mb-[-20px] pb-[20px] md:mb-0 md:pb-0 bg-[<%= theme.header_primary_color %>] md:bg-white md:bg-none" id="payment_header">
+  <%= render(partial:, locals: local_assigns.merge(theme:)) %>
+</div>
