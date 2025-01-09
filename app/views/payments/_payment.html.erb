@@ -4,15 +4,14 @@
 <div class="w-full  h-screen flex justify-center items-center md:bg-gray-100">
   <div
     class="
-      bg-gradient-to-r from-cyan-500 to-blue-500 w-full h-screen md:h-auto flex
-      flex-col md:bg-none md:flex-row md:grid md:grid-cols-[45%_55%] md:divide-x
-      md:divide-gray-300 md:bg-white md:rounded-3xl md:py-8 md:min-h-[50%] md:w-auto
-      md:min-w-[50%] md:max-w-[70%] overflow-scroll md:overflow-hidden
+      w-full h-screen md:h-auto flex
+      flex-col md:flex-row md:grid md:grid-cols-[45%_55%] md:divide-x
+      md:divide-gray-300 md:rounded-3xl md:py-8 md:min-h-[50%] md:w-auto md:bg-white
+      md:min-w-[50%] md:max-w-[70%] overflow-scroll md:overflow-hidden relative md:static
     "
   >
-    <div class="flex-initial">
-      <%= render(partial: header_partial, locals: local_assigns) %>
-    </div>
+
+    <%= render(partial: header_partial, locals: local_assigns) %>
 
     <div
       class="

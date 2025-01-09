@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'payment_header' do %>
+<div class="flex-initial bg-gradient-to-r from-cyan-500 to-blue-500 md:bg-white md:bg-none" id="payment_header">
   <p class="text-xl font-medium mt-5 ml-6">Совершите перевод</p>
   <p class="text-sm font-extralight mt-5 ml-6">Скопируйте реквизиты, сделайте перевод, ожидайте зачисления</p>
   <div class="mt-5 mb-5 ml-6 mr-6">
@@ -16,4 +16,4 @@
       <li class="font-light">Номер платежа <span class="text-red-500"><%= payment[:id] %></span></li>
     </ul>
   </div>
-<% end %>
+</div>

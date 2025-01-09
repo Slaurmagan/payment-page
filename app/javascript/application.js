@@ -17,7 +17,7 @@ Turbo.StreamActions.console_log = function () {
 Turbo.StreamActions.replaceWithSlideAnimation = function () {
   const method = this.getAttribute("method");
   const withAnimation =
-    this.templateContent.querySelector("turbo-frame").dataset.withAnimation ===
+    this.templateContent.querySelector("turbo-frame")?.dataset?.withAnimation ===
     "true";
 
   this.targetElements.forEach((targetElement) => {
