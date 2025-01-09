@@ -16,7 +16,7 @@ class PaymentMessageProcessor < ApplicationService
       [
         %w[payment_body payments/payment/body/body],
         %w[payment_header payments/payment/header/header]
-      ], stream_name, locals: { payment:, with_animation: true, theme: }, action: 'replaceWithSlideAnimation')
+      ], stream_name, locals: { payment:, with_animation: true }, action: 'replaceWithSlideAnimation')
   end
 
   private
