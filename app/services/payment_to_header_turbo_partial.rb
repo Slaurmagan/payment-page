@@ -11,7 +11,9 @@ class PaymentToHeaderTurboPartial < ApplicationService
       in ['pending', String, nil, _]
         'payments/payment/header/loading_header'
       in ['processing', String, String, 'sberbank_deeplink']
-        'payments/payment/header/sberbank_deeplink_header'
+        'payments/payment/header/deeplink_header'
+      in ['processing', String, String, 'tinkoff_deeplink']
+        'payments/payment/header/deeplink_header'
       in ['processing', String, String, _]
         'payments/payment/header/payment_requisite_header'
       in ['success', _, _, _]
