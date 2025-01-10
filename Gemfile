@@ -46,4 +46,3 @@ gem 'httparty'
 gem 'dry-monads'
 
 gem "jsbundling-rails", "~> 1.3"
-gem "rqrcode", "~> 2.0"

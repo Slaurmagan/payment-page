@@ -11,6 +11,8 @@ import SupportController from "./support_controller.js";
 import RequestOnConnect from './request_on_connect_controller.js'
 import DeeplinksController from './deeplinks_controller.js'
 import RedirectFromIframeController from './redirect_from_iframe_controller.js'
+import QrController from './qr_controller'
+
 const application = Application.start();
 
 application.register("hello", HelloController);
@@ -25,6 +27,7 @@ application.register("support", SupportController)
 application.register('request-on-connect', RequestOnConnect)
 application.register('deeplinks', DeeplinksController)
 application.register('redirect-from-iframe', RedirectFromIframeController)
+application.register('qr', QrController)
 
 // Configure Stimulus development experience
 application.debug = false;

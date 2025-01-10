@@ -10,15 +10,4 @@ module ApplicationHelper
                   analytics_url_pattern_value: url_pattern
                 }
   end
-
-  def link_as_qr_code(uri)
-    RQRCode::QRCode.new(uri).as_svg(
-      offset: 0,
-      color: '000',
-      shape_rendering: 'crispEdges',
-      module_size: 3,
-      standalone: true,
-      size: 10
-    ).html_safe
-  end
 end
