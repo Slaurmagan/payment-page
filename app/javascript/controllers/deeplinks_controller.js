@@ -7,7 +7,6 @@ export default class extends Controller {
   }
 
   open() {
-    console.log('clicked')
     const links = this.linksValue[this.getMobileOperatingSystem()]
 
     if (links) {
