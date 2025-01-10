@@ -3,7 +3,7 @@
     class="
       flex flex-col items-center mt-8 animated <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
     "
-    data-controller="auto-refresh redirect-from-iframe"
+    data-controller="auto-refresh"
     data-auto-refresh-frequency-value="15"
     data-auto-refresh-path-value="cached_payment"
     data-auto-refresh-hash-value="<%= payment[:hash] %>"
