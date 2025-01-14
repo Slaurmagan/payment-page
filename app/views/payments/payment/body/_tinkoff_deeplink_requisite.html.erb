@@ -18,14 +18,10 @@
 
     <div class="w-full h-24 px-6 sm:px-12 mt-2 md:hidden">
       <div class="h-full w-full py-4">
-        <div
-          class="
-              h-full bg-[#ffdd2d] flex justify-center items-center rounded-2xl px-4 sm
-            "
-        >
-          <%= link_to 'Открыть приложение', payment[:deeplinks], class: 'text-base sm:text-lg inline' %> &nbsp;&nbsp;&nbsp;
+        <%= link_to payment[:deeplinks], class: 'h-full bg-[#ffdd2d] flex justify-center items-center rounded-2xl px-4 sm' do %>
+          <span class="text-base sm:text-lg inline">Открыть приложение</span> &nbsp;&nbsp;&nbsp;
           <%= image_tag 't-pay.svg', width: 70 %>
-        </div>
+        <% end %>
       </div>
     </div>
 
