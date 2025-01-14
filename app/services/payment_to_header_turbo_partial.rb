@@ -20,6 +20,8 @@ class PaymentToHeaderTurboPartial < ApplicationService
         'payments/payment/header/success_header'
       in ['expired', _, _, _]
         'payments/payment/header/expired_header'
+      in ['processing', String, _, 'redirect']
+        'payments/payment/header/redirect_to_external_payment_page'
       else
         'payments/payment/header/payment_methods_header'
       end

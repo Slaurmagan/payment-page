@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :analytics
       post :expire
       post :requisite
+      post :generate_invoice_link
 
       # Support
       post :create_ticket

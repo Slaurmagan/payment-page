@@ -4,16 +4,17 @@
       flex flex-col items-center justify-center h-full animated
       <%= local_assigns[:with_animation] ? "out-of-screen" : "" %>
     "
-    data-controller="auto-refresh"
+    data-controller="auto-redirect auto-refresh"
+    data-auto-redirect-redirect-in-value="5"
+    data-auto-redirect-redirect-to-value="<%= payment[:payment_link] %>"
     data-auto-refresh-frequency-value="15"
     data-auto-refresh-path-value="cached_payment"
     data-auto-refresh-hash-value="<%= payment[:hash] %>"
   >
-    <%= request_on_connect(payment) %>
-
     <%= image_tag "loading.gif" %>
-    <p>
-      Ожидайте выдачи реквизита
+
+    <p class="text-center">
+      Ожидайте перенаправления на <%= link_to 'страницу', payment[:payment_link], class: "text-underline text-[#{theme.body_primary_color}]" %> оплаты
     </p>
   </div>
 <% end %>
