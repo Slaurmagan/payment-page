@@ -32,6 +32,8 @@ class PaymentToBodyTurboPartial < ApplicationService
         'payments/payment/body/sberbank_deeplink_requisite'
       in ['processing', String, String, 'tinkoff_deeplink', _]
         'payments/payment/body/tinkoff_deeplink_requisite'
+      in ['processing', String, _, 'redirect', _]
+        'payments/payment/body/redirect_to_external_payment_page'
       else
         'payments/payment/body/error'
       end

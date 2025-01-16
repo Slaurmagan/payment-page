@@ -98,6 +98,18 @@ class PaymentsController < ApplicationController
     render_payment(payment)
   end
 
+  def generate_invoice_link
+    response = ApiClient::GenerateInvoiceLink.call(params[:id])
+    payment =
+      if response.success?
+        response.value!
+      else
+        response.failure
+      end
+
+    render_payment(payment)
+  end
+
   private
 
   def find_payment
