@@ -18,10 +18,19 @@
 
     <div class="w-full h-24 px-6 sm:px-12 mt-2 md:hidden">
       <div class="h-full w-full py-4">
-        <%= link_to payment[:deeplinks], class: 'h-full bg-[#ffdd2d] flex justify-center items-center rounded-2xl px-4 sm' do %>
-          <span class="text-base sm:text-lg inline">Открыть приложение</span> &nbsp;&nbsp;&nbsp;
+        <div
+          class="
+              h-full bg-[#ffdd2d] flex justify-center items-center rounded-2xl px-4
+            "
+          data-controller="deeplinks"
+          data-deeplinks-links-value="<%= payment[:deeplinks].to_json %>"
+          data-action="click->deeplinks#open"
+        >
+          <span
+            class="text-base md:text-lg"
+          >Открыть приложение</span> &nbsp;&nbsp;&nbsp;
           <%= image_tag 't-pay.svg', width: 70 %>
-        <% end %>
+        </div>
       </div>
     </div>
 
